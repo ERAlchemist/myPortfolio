@@ -22,9 +22,8 @@ As a User I want to be able to....<br>
     * See a calendar view of what requests are due on which days<br>
     * Close out a request once it is complete<br><br>
 **Problem**<br>
-So one of the biggest problems I needed to solve on this project was to figure out how to create a recurring sample request (e.g. a request that would repeat on a set interval.)  I relealized all it really needed to do was create a duplicate request with the same parameters and samples after the previous request was closed and increase the `:due_date` by one interval length.  So for this i turned to the help of the [ameoba gem](Ihttps://github.com/amoeba-rb/amoeba) which allows for easily copying Active Record objects including their children. This gem was simple and easy to use.  I just needed to place the amoeba method call in the Request model and indicate which fields to set to null (`:time_completed` and `:complete`) and inidicated to clone the associated `:samples` <br>
+So one of the biggest problems I needed to solve on this project was to figure out how to create a recurring sample request (e.g. a request that would repeat on a set interval.)  I relealized all it really needed to do was create a duplicate request with the same parameters and samples after the previous request was closed and increase the `:due_date` by one interval length.  So for this i turned to the help of the [ameoba gem](https://github.com/amoeba-rb/amoeba) which allows for easily copying Active Record objects including their children. This gem was simple and easy to use.  I just needed to place the amoeba method call in the Request model and indicate which fields to set to null (`:time_completed` and `:complete`) and inidicated to clone the associated `:samples` <br>
 {% highlight ruby %}
-
     class Request < ApplicationRecord
         has_many :samples
 
@@ -33,14 +32,11 @@ So one of the biggest problems I needed to solve on this project was to figure o
             nullify [:time_completed, :complete]
             clone :samples
         end
-
 {% endhighlight %}<br>
-
 The amoeba method call would also need to be added to the Sample model as well.  The `:is_empty`, `:time_completed`, and `:complete` fields would be nullified.
 {% highlight ruby %}
 class Sample < ApplicationRecord
     belongs_to :request, optional: true
-
     amoeba do
         enable
         nullify [:is_empty, :time_completed, :complete]
@@ -90,7 +86,6 @@ Finally, the view needed to allow for the user to specify values for the `is_rec
   <%= f.submit %>
 </div>
 {% endhighlight %}<br>
-
 <img src="/img/schedule_view.png">
 <img src="/img/side_nav.png">
 <img src="/img/RequestList.png">
