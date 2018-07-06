@@ -2,7 +2,7 @@
 layout: post
 title: BlocJams
 feature-img: "img/sample_feature_img.png"
-thumbnail-path: "img/bloc_jams_angular_3x4.png"
+thumbnail-path: "img/bloc-jams-react.png"
 short-description: A basic web music player (Spotify clone) to learn the fundamentals of HTML/CSS, and DOM manipulation with javascript. 
 ---
 **Summary**<br>
