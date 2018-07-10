@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bloccit
-feature-img: "img/sample_feature_img2.png"
+feature-img: "img/sample_feature_img_2.png"
 thumbnail-path: "img/bloccit.png"
 short-description: A RubyOnRails Reddit clone application I built while in the Bloc program.
 ---
